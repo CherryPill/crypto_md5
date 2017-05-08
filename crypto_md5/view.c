@@ -93,8 +93,6 @@ void createHashEditText(HWND parent) {
 		NULL,
 		NULL);
 }
-//modifying
-
 void changeFileLabelText(HWND parent, TCHAR *fileNameShort) {
 	HWND fileLabelHandle = GetDlgItem(parent, FILE_LABEL);
 	SetWindowText(fileLabelHandle, fileNameShort);
@@ -102,7 +100,6 @@ void changeFileLabelText(HWND parent, TCHAR *fileNameShort) {
 void changeHashEditText(HWND parent, char *hashText) {
 	HWND hashTextHandle = GetDlgItem(parent, EDIT_TEXT_HASH);
 	SetWindowText(hashTextHandle, hashText);
-	int sentinel = 10;
 }
 void toggleShowProgressPart(BOOL v, HWND parent) {
 	SetWindowText(GetDlgItem(parent, COMPUTED_HASH_LABEL), "0%");

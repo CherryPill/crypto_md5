@@ -5,7 +5,6 @@
 #include "globalVars.h"
 #include "mainWindowProc.h"
 #include "utility.h"
-//TODO shorten long file names
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	PWSTR lpCmdLine, int nCmdShow) {
 	INITCOMMONCONTROLSEX icc;
@@ -13,7 +12,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	icc.dwICC = ICC_WIN95_CLASSES;
 	InitCommonControlsEx(&icc);
 	MSG msg;
-	WNDCLASSEX wc = { 0 }; //nullifying the struct
+	WNDCLASSEX wc = { 0 };
 	wc.cbSize = sizeof(wc);
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 	wc.cbClsExtra = 0;

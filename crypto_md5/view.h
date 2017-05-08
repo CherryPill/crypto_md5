@@ -36,7 +36,7 @@ void createProgressBar(HWND);
 //modifying controls
 void changeFileLabelText(HWND, TCHAR *);
 void changeHashEditText(HWND, char *str);
-//progress bar
+//progress bar and hash text alternation
 INT32 parseShowValue(BOOL);
 void toggleShowHashPart(BOOL, HWND);
 void toggleShowProgressPart(BOOL, HWND);

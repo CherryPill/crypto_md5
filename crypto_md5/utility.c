@@ -30,7 +30,6 @@ TCHAR *shortenPath(TCHAR *path) {
 	TCHAR *extensionPart;
 	_tcsncpy(shortenedPath, path, 4);
 	_tcscat(shortenedPath, _T(".."));
-
 	path+=4+1;
 	_tcstok(path, _T("."));
 	lastPart = path+_tcslen(path)-4;
@@ -39,7 +38,5 @@ TCHAR *shortenPath(TCHAR *path) {
 	_tcscat(shortenedPath, _T("."));
 	_tcscat(shortenedPath, path);
 	memset(path, 0, sizeof(path));
-	
-	int sentinel = 0xf;
 	return shortenedPath;
 }
