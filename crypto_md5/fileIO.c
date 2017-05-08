@@ -19,18 +19,14 @@ int openFileDiag(HWND mainWindow, TCHAR *loadedFilePath, TCHAR *fileNoPath) {
 		| OFN_OVERWRITEPROMPT
 		| OFN_EXPLORER
 		| OFN_HIDEREADONLY;
+
 	if (GetOpenFileName(&fileName)){
 		_tcscpy(loadedFilePath, fileName.lpstrFile);
 		getFileNameFromPath(loadedFilePath, fileNoPath);
 		return 0;
-		//success
 	}
 	else {
+		//window was dismissed
 		return 1;
-		//failure
 	}
-
-
-
-
 }

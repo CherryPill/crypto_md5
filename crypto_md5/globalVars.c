@@ -3,8 +3,8 @@
 HWND mainWindowHandle;
 HINSTANCE ghInstance;
 HWND progressBarCntrl;
-char *programName = "Lab 3 - MD5";
-char *programClass = "Lab 3 - MD5";
+char *programName = "MD5 hash generation tool";
+char *programClass = "MD5 hash generation tool";
 
 int mainWindowHeight = 120;
 int mainWindowWidth = 350;
