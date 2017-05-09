@@ -20,7 +20,7 @@ void generateHash(TCHAR *filePath, char *hash) {
 	DWORD totalBytesRead = 0;
 	BYTE rgbHash[MD5LEN];
 	DWORD cbHash = 0;
-	TCHAR rgbDigits[] = "0123456789abcdef";
+	TCHAR rgbDigits[] = _T("0123456789abcdef");
 	
 	hFile = CreateFile(filePath,
 		GENERIC_READ,
