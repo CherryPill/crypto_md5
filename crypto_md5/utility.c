@@ -27,16 +27,29 @@ void getFileNameFromPath(TCHAR *fullPath, TCHAR *fileName) {
 TCHAR *shortenPath(TCHAR *path) {
 	static TCHAR shortenedPath[256] = {0};
 	TCHAR *lastPart = NULL;
-	TCHAR *extensionPart;
+	TCHAR *extensionPart[256] = {0};
 	_tcsncpy(shortenedPath, path, 4);
 	_tcscat(shortenedPath, _T(".."));
 	path+=4+1;
-	_tcstok(path, _T("."));
+	separateNameAndExt(path, extensionPart);
 	lastPart = path+_tcslen(path)-4;
 	_tcscat(shortenedPath, lastPart);
-	path = _tcstok(NULL, _T("."));
-	_tcscat(shortenedPath, _T("."));
-	_tcscat(shortenedPath, path);
+	_tcscat(shortenedPath, extensionPart);
 	memset(path, 0, sizeof(path));
 	return shortenedPath;
+}
+void separateNameAndExt(TCHAR *fullPath, TCHAR *ext) {
+	int c = _tcslen(fullPath)-1;
+	TCHAR *extLoc = fullPath+c;
+	TCHAR singleChar;
+	do {
+		singleChar = *extLoc;
+		if (singleChar == _T('.')) {
+			break;
+		}
+		--c;
+		extLoc = fullPath+c;
+	}while(extLoc!=fullPath);
+	_tcscpy(ext, extLoc);
+	fullPath[c] = _T('\0');
 }
