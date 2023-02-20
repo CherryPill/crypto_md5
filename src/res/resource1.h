@@ -1,0 +1,11 @@
+//
+// Created by Roman on 2/20/2023.
+//
+
+#ifndef CMAKE_TEST_PROJ_RESOURCE1_H
+#define CMAKE_TEST_PROJ_RESOURCE1_H
+
+
+#define IDI_ICON1 101
+
+#endif //CMAKE_TEST_PROJ_RESOURCE1_H
