@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VIEW_H
+#define VIEW_H
 
 
 #include <windows.h>
@@ -55,3 +56,5 @@ void toggleProgressBarVisibility(BOOL, HWND);
 void toggleShowHashPart(BOOL, HWND);
 
 void toggleShowProgressPart(BOOL, HWND);
+
+#endif
