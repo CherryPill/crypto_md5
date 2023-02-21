@@ -60,8 +60,9 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
+CREATEPROCESS_MANIFEST_RESOURCE_ID  RT_MANIFEST "../crypto_md5.manifest"
 IDI_ICON1               ICON                    "padlock.ico"
-CREATEPROCESS_MANIFEST_RESOURCE_ID  RT_MANIFEST "crypto_md5.manifest"
+
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.21)
 
 project(md5_hash_tool)
 
@@ -8,7 +8,6 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 include_directories(${C_INCLUDE_PATH}/include)
 link_directories(${C_INCLUDE_PATH}/lib)
-
 
 add_executable(md5_hash_tool WIN32
         src/main.c
@@ -21,8 +20,13 @@ add_executable(md5_hash_tool WIN32
         src/util/utility.c
         src/ui/view.c
         src/res/resource1.h
-        src/res/crypto_md5.manifest)
+        src/crypto_md5.manifest)
 
-target_sources(md5_hash_tool PUBLIC src/res/crypto_md5.manifest)
+#target_sources(md5_hash_tool PUBLIC src/res/crypto_md5.manifest)
 target_link_libraries(md5_hash_tool comctl32)
-set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME md5_hash_tool_x86)
+
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    target_link_libraries(md5_hash_tool -manifest:embed -manifestinput:"${PROJECT_SOURCE_DIR}/src/crypto_md5.manifest")
+endif ()
+
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME md5_hash_tool)
