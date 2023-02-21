@@ -19,15 +19,13 @@ add_executable(md5_hash_tool WIN32
         src/proc/mainwindowProc.c
         src/util/utility.c
         src/ui/view.c
-        src/res/resource1.h
-        src/crypto_md5.manifest)
+        src/res/resource1.h)
 
-#target_sources(md5_hash_tool PUBLIC src/res/crypto_md5.manifest)
+
 target_link_libraries(md5_hash_tool comctl32)
 
+
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    add_compile_options(/W1)
-    target_link_libraries(md5_hash_tool -manifest:embed -manifestinput:"${PROJECT_SOURCE_DIR}/src/crypto_md5.manifest")
+    target_link_options(md5_hash_tool PRIVATE "LINKER:/MANIFEST:NO")
 endif ()
 
-set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME md5_hash_tool)
