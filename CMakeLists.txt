@@ -26,6 +26,7 @@ add_executable(md5_hash_tool WIN32
 target_link_libraries(md5_hash_tool comctl32)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    add_compile_options(/W1)
     target_link_libraries(md5_hash_tool -manifest:embed -manifestinput:"${PROJECT_SOURCE_DIR}/src/crypto_md5.manifest")
 endif ()
 
