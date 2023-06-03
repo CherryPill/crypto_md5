@@ -74,7 +74,7 @@ void copyToClipBoard(HWND parent, const char *hashText) {
             CloseClipboard();
             SetWindowText(infoHolderLabel, "Copied to clipboard");
         } else {
-            enum errorMsgResolver errorMsgIdx = clipboardError;
+            enum ErrorMsgResolver errorMsgIdx = ClipboardError;
             SetWindowText(infoHolderLabel, errorMessages[errorMsgIdx]);
         }
     }

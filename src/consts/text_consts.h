@@ -7,13 +7,13 @@
 
 #include <tchar.h>
 
-enum errorMsgResolver {
-    openFileError = 0,
+enum ErrorMsgResolver {
+    OpenFileError = 0,
     CryptAcquireCtxError,
     CryptCreateHashError,
     CryptHashDataError,
-    fileReadError,
-    clipboardError
+    FileReadError,
+    ClipboardError
 };
 
 static TCHAR* errorMessages[] = {
