@@ -24,13 +24,19 @@ add_executable(md5_hash_tool WIN32
         src/handler/error_handler.h
         src/consts/text_consts.c
         src/consts/text_consts.h
-)
-
+        )
 
 target_link_libraries(md5_hash_tool comctl32)
-
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     target_link_options(md5_hash_tool PRIVATE "LINKER:/MANIFEST:NO")
 endif ()
+
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "RelWithDebInfo" CACHE STRING
+            "Default build type: RelWithDebInfo" FORCE)
+endif ()
+
+message("Generated with config types: ${CMAKE_CONFIGURATION_TYPES}")
+
 
