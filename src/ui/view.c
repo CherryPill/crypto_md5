@@ -1,17 +1,21 @@
 #include <tchar.h>
 #include "view.h"
 #include "../global/globalVars.h"
+#include "../util/utility.h"
 
 TCHAR *labels[] = {
         _T("No file loaded"),
         _T(" loaded")
 };
 
+void createInfoHolderLabel(HWND parent);
+
 void createMainArea(HWND parentWindow) {
     createButtons(parentWindow);
     createLabels(parentWindow);
     createHashEditText(parentWindow);
     createProgressBar(parentWindow);
+    createInfoHolderLabel(parentWindow);
 }
 
 void createProgressBar(HWND parent) {
@@ -32,7 +36,7 @@ void createButtons(HWND parent) {
             buttonData[0],
             WS_CHILD | WS_VISIBLE,
             labelDimensionsData[0] + controlsMargin,
-            0,
+            controlsMargin,
             buttonDimensionsData[0],
             buttonDimensionsData[1],
             parent,
@@ -45,11 +49,11 @@ void createButtons(HWND parent) {
             buttonData[1],
             WS_CHILD | WS_VISIBLE,
             labelDimensionsData[0] + controlsMargin * 2 + buttonDimensionsData[0] + controlsMargin,
-            0,
+            controlsMargin,
             buttonDimensionsData[0],
             buttonDimensionsData[1],
             parent,
-            (HMENU) BUTTON_DATA_CLEAR,
+            (HMENU) BUTTON_DATA_RESET,
             NULL,
             NULL);
 }
@@ -61,7 +65,7 @@ void createLabels(HWND parent) {
             labels[0],
             WS_CHILD | WS_VISIBLE | SS_CENTER,
             0,
-            controlsMargin,
+            controlsMargin * 2,
             labelDimensionsData[0],
             labelDimensionsData[1],
             parent,
@@ -73,7 +77,7 @@ void createLabels(HWND parent) {
             "Static",
             hashLabelData,
             WS_CHILD | WS_VISIBLE | SS_CENTER,
-            0,
+            controlsMargin,
             labelDimensionsData[1] + controlsMargin * 2,
             labelDimensionsData[0],
             labelDimensionsData[1],
@@ -99,10 +103,37 @@ void createHashEditText(HWND parent) {
             NULL);
 }
 
+void createInfoHolderLabel(HWND parent) {
+    CreateWindowEx(
+            0,
+            "Static",
+            _T(""),
+            WS_CHILD | WS_VISIBLE | SS_CENTER,
+            getCenteringPosition(mainWindowWidth, labelDimensionsData[0]),
+            (labelDimensionsData[1] + controlsMargin) * 2,
+            labelDimensionsData[0],
+            labelDimensionsData[1],
+            parent,
+            (HMENU) INFO_HOLDER_LABEL,
+            NULL,
+            NULL);
+}
+
 void changeFileLabelText(HWND parent, TCHAR *fileNameShort) {
     HWND fileLabelHandle = GetDlgItem(parent, FILE_LABEL);
     SetWindowText(fileLabelHandle, fileNameShort);
 }
+
+void resetClipboardLabel(HWND parent) {
+    HWND clipboardLabel = GetDlgItem(parent, INFO_HOLDER_LABEL);
+    SetWindowText(clipboardLabel, _T(""));
+}
+
+void resetLabels(HWND hwnd) {
+    changeFileLabelText(hwnd, labels[0]);
+    resetClipboardLabel(hwnd);
+}
+
 
 void changeHashEditText(HWND parent, char *hashText) {
     HWND hashTextHandle = GetDlgItem(parent, EDIT_TEXT_HASH);

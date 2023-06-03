@@ -19,7 +19,12 @@ add_executable(md5_hash_tool WIN32
         src/proc/mainwindowProc.c
         src/util/utility.c
         src/ui/view.c
-        src/res/resource1.h)
+        src/res/resource1.h
+        src/handler/error_handler.c
+        src/handler/error_handler.h
+        src/consts/text_consts.c
+        src/consts/text_consts.h
+)
 
 
 target_link_libraries(md5_hash_tool comctl32)

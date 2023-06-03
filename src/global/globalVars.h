@@ -9,4 +9,9 @@ extern HWND progressBarCntrl;
 extern char *programClass;
 extern int mainWindowHeight;
 extern int mainWindowWidth;
+
+struct ERROR_INFO {
+    TCHAR *failedAction;
+    DWORD statusCode;
+};
 #endif

@@ -10,6 +10,7 @@ void centerWindow(POINT *position) {
     position->y = userMonitorHeight / 2 - mainWindowHeight / 2;
 }
 
+
 void getFileNameFromPath(TCHAR *fullPath, TCHAR *fileName) {
     TCHAR fullPathTempBuff[256] = {0};
     _tcscpy(fullPathTempBuff, fullPath);
@@ -54,4 +55,8 @@ void separateNameAndExt(TCHAR *fullPath, TCHAR *ext) {
     } while (extLoc != fullPath);
     _tcscpy(ext, extLoc);
     fullPath[c] = _T('\0');
+}
+
+int getCenteringPosition(int outerArea, int innerArea) {
+    return outerArea / 2 - innerArea / 2;
 }

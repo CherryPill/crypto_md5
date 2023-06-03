@@ -5,6 +5,9 @@
 #include "../io/fileIO.h"
 #include "../util/utility.h"
 #include "../enc/hashing.h"
+#include "../consts/text_consts.h"
+
+void copyToClipBoard(HWND parent, const char *hashText);
 
 LRESULT CALLBACK mainwindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
@@ -15,7 +18,8 @@ LRESULT CALLBACK mainwindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             break;
         }
         case WM_COMMAND: {
-            switch (LOWORD(wParam)) {
+            WORD receivedOp = LOWORD(wParam);
+            switch (receivedOp) {
                 case BUTTON_FILE_OPEN: {
                     TCHAR filePathBuff[256] = {0};
                     TCHAR filePathShortBuff[256] = {0};
@@ -35,11 +39,12 @@ LRESULT CALLBACK mainwindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                         generateHash(filePathBuff, computedHash);
                         toggleProgressBarVisibility(FALSE, hwnd);
                         changeHashEditText(hwnd, computedHash);
+                        copyToClipBoard(hwnd, computedHash);
                     }
                     break;
                 }
-                case BUTTON_DATA_CLEAR: {
-                    changeFileLabelText(hwnd, labels[0]);
+                case BUTTON_DATA_RESET: {
+                    resetLabels(hwnd);
                     changeHashEditText(hwnd, "");
                     break;
                 }
@@ -51,6 +56,28 @@ LRESULT CALLBACK mainwindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             break;
     }
     return DefWindowProcW(hwnd, msg, wParam, lParam);
+}
+
+
+void copyToClipBoard(HWND parent, const char *hashText) {
+
+    if (hashText != NULL) {
+        const size_t hashCharLen = _tcslen(hashText) * sizeof(TCHAR) + 1;
+        HGLOBAL allocatedMem = GlobalAlloc(GMEM_MOVEABLE, hashCharLen);
+        memcpy(GlobalLock(allocatedMem), hashText, hashCharLen);
+
+        HWND infoHolderLabel = GetDlgItem(parent, INFO_HOLDER_LABEL);
+
+        if (OpenClipboard(parent)) {
+            EmptyClipboard();
+            SetClipboardData(CF_TEXT, allocatedMem);
+            CloseClipboard();
+            SetWindowText(infoHolderLabel, "Copied to clipboard");
+        } else {
+            enum errorMsgResolver errorMsgIdx = clipboardError;
+            SetWindowText(infoHolderLabel, errorMessages[errorMsgIdx]);
+        }
+    }
 }
 
 BOOL CALLBACK SetFont(HWND child, LPARAM font) {

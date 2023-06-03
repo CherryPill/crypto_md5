@@ -9,12 +9,14 @@
 #define FILE_LABEL 1
 #define COMPUTED_HASH_LABEL 2
 #define BUTTON_FILE_OPEN 3
-#define BUTTON_DATA_CLEAR 4
+#define BUTTON_DATA_RESET 4
 #define EDIT_TEXT_HASH 5
+#define INFO_HOLDER_LABEL 6
 /*width and height*/
-static const int labelDimensionsData[2] = {
+static const int labelDimensionsData[] = {
         2 << 6,
-        2 << 4
+        2 << 4,
+        2 << 7
 };
 static const int hashEditTextDimensionsData[2] = {
         160,
@@ -29,7 +31,7 @@ static char *hashLabelData = "Computed hash: ";
 extern TCHAR *labels[];
 static char *buttonData[2] = {
         "Open",
-        "Clear"
+        "Reset"
 };
 
 //creating controls
@@ -47,6 +49,10 @@ void createProgressBar(HWND);
 void changeFileLabelText(HWND, TCHAR *);
 
 void changeHashEditText(HWND, char *str);
+
+void resetClipboardLabel(HWND parent);
+
+void resetLabels(HWND parent);
 
 //progress bar and hash text alternation
 INT32 parseShowValue(BOOL);
