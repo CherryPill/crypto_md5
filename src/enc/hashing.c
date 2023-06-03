@@ -41,7 +41,7 @@ void generateHash(TCHAR *filePath, char *hash) {
     GetFileSizeEx(hFile, &totalBytes);
 
     if (hFile == INVALID_HANDLE_VALUE) {
-        enum errorMsgResolver errorMsgIdx = openFileError;
+        enum ErrorMsgResolver errorMsgIdx = OpenFileError;
         struct ERROR_INFO errorInfo = {errorMessages[errorMsgIdx], GetLastError()};
         handleError(errorInfo);
     }
@@ -53,7 +53,7 @@ void generateHash(TCHAR *filePath, char *hash) {
                              CRYPT_VERIFYCONTEXT)) {
         CloseHandle(hFile);
 
-        enum errorMsgResolver errorMsgIdx = CryptAcquireCtxError;
+        enum ErrorMsgResolver errorMsgIdx = CryptAcquireCtxError;
         struct ERROR_INFO errorInfo = {errorMessages[errorMsgIdx], GetLastError()};
         handleError(errorInfo);
     }
@@ -63,7 +63,7 @@ void generateHash(TCHAR *filePath, char *hash) {
         CloseHandle(hFile);
         CryptReleaseContext(hProv, 0);
 
-        enum errorMsgResolver errorMsgIdx = CryptCreateHashError;
+        enum ErrorMsgResolver errorMsgIdx = CryptCreateHashError;
         struct ERROR_INFO errorInfo = {errorMessages[errorMsgIdx], GetLastError()};
         handleError(errorInfo);
     }
@@ -75,7 +75,7 @@ void generateHash(TCHAR *filePath, char *hash) {
         }
         if (!CryptHashData(hHash, rgbFile, cbRead, 0)) {
             cleanUpResources(hProv, hHash, hFile);
-            enum errorMsgResolver errorMsgIdx = CryptHashDataError;
+            enum ErrorMsgResolver errorMsgIdx = CryptHashDataError;
             struct ERROR_INFO errorInfo = {errorMessages[errorMsgIdx], GetLastError()};
             handleError(errorInfo);
         }
@@ -95,7 +95,7 @@ void generateHash(TCHAR *filePath, char *hash) {
 
     if (!bResult) {
         cleanUpResources(hProv, hHash, hFile);
-        enum errorMsgResolver errorMsgIdx = fileReadError;
+        enum ErrorMsgResolver errorMsgIdx = FileReadError;
         struct ERROR_INFO errorInfo = {errorMessages[errorMsgIdx], GetLastError()};
     }
     cbHash = MD5LEN;
